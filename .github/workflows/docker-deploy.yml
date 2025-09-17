@@ -37,8 +37,8 @@ jobs:
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          REPO_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-          OWNER_NAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO_NAME=$(echo "${{ github.event.repository.name }}")
+          OWNER_NAME=$(echo "${{ github.repository_owner }}")
 
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
           echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
