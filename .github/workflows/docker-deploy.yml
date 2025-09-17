@@ -94,5 +94,5 @@ jobs:
           echo "Repository: ${{ env.IMAGE_NAME }}"
           echo "DEV Tags: ${{ steps.tags.outputs.dev_tags }}"
           echo "PROD Tags: ${{ steps.tags.outputs.prod_tags }}"
-          echo "Branch: ${{ steps.tags.outputs.branch_name }}"
-          echo "Commit: ${{ steps.tags.outputs.short_sha }}"
+          # echo "Branch: ${{ steps.tags.outputs.branch_name }}"
+          # echo "Commit: ${{ steps.tags.outputs.short_sha }}"
