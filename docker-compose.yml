@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  juniorfrontend:
+    image: ghcr.io/cabinet-ceipi/gb-etat-pccg-frontendadmin:dev-latest
+    restart: always
+    ports:
+      - 31203:3000
+
+  juniorfrontendprod:
+    image: ghcr.io/cabinet-ceipi/gb-etat-pccg-frontendadmin:latest
+    restart: always
+    ports:
+      - 31204:3000
+
+  # junior_app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-dev
+  #   ports:
+  #     - "31203:3000"
+  #   restart: unless-stopped
