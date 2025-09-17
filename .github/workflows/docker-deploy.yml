@@ -7,7 +7,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/${{ github.event.repository.name }}
+  IMAGE_NAME: ${{ github.event.repository.name }}
+# ${{ github.repository_owner }}/
 
 jobs:
   build-and-push:
@@ -39,8 +40,8 @@ jobs:
           # Générer le SHA court
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           # Convertir le nom du repository en minuscules
-          REPO_NAME=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-          OWNER_NAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO_NAME=$(echo "${{ github.event.repository.name }}")
+          # OWNER_NAME=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
 
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
           echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
@@ -48,16 +49,16 @@ jobs:
 
           # Pour main, utiliser latest (manifest vide)
           if [[ "$BRANCH_NAME" == "main" ]]; then
-            DEV_TAGS="${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:dev-latest"
-            PROD_TAGS="${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:latest"
+            DEV_TAGS="${{ env.REGISTRY }}/$REPO_NAME:dev-latest"
+            PROD_TAGS="${{ env.REGISTRY }}/$REPO_NAME:latest"
           #   echo "Using latest tags for main branch"
           # else
           #   # Pour les autres branches, utiliser le nom de branche et SHA
           #   CLEAN_BRANCH_NAME=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
-          #   DEV_TAGS="${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:dev-$CLEAN_BRANCH_NAME"
-          #   DEV_TAGS="$DEV_TAGS,${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:dev-sha-$SHORT_SHA"
-          #   PROD_TAGS="${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:$CLEAN_BRANCH_NAME"
-          #   PROD_TAGS="$PROD_TAGS,${{ env.REGISTRY }}/$OWNER_NAME/$REPO_NAME:sha-$SHORT_SHA"
+          #   DEV_TAGS="${{ env.REGISTRY }}/$REPO_NAME:dev-$CLEAN_BRANCH_NAME"
+          #   DEV_TAGS="$DEV_TAGS,${{ env.REGISTRY }}/$REPO_NAME:dev-sha-$SHORT_SHA"
+          #   PROD_TAGS="${{ env.REGISTRY }}/$REPO_NAME:$CLEAN_BRANCH_NAME"
+          #   PROD_TAGS="$PROD_TAGS,${{ env.REGISTRY }}/$REPO_NAME:sha-$SHORT_SHA"
           fi
 
           echo "dev_tags=$DEV_TAGS" >> $GITHUB_OUTPUT
