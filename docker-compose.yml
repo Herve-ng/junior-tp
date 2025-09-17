@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   juniorfrontend:
-    image: ghcr.io/cabinet-ceipi/gb-etat-pccg-frontendadmin:dev-latest
+    image: ghcr.io/herve-ng/junior-tp:dev-latest
     restart: always
     ports:
       - 31203:3000
 
   juniorfrontendprod:
-    image: ghcr.io/cabinet-ceipi/gb-etat-pccg-frontendadmin:latest
+    image: ghcr.io/herve-ng/junior-tp:latest
     restart: always
     ports:
       - 31204:3000
